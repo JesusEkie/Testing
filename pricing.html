@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grievance.app Pricing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-300: #55be72;
+      --green-400: #47ae5f;
+      --green-500: #00cc61;
+      --teal-900: #004050;
+      --gray-50: #f6f9f7;
+      --gray-100: #edf3ef;
+      --gray-300: #d8e3dd;
+      --gray-600: #4c5b58;
+      --gray-800: #1d2624;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      color: var(--gray-800);
+      background: white;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, rgba(0, 204, 97, 0.08), rgba(0, 64, 80, 0.08));
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+      color: var(--teal-900);
+    }
+
+    header p {
+      max-width: 780px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: var(--gray-600);
+    }
+
+    .section {
+      padding: 4rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section h2 {
+      font-size: clamp(1.75rem, 3vw, 2.4rem);
+      margin-bottom: 0.75rem;
+      color: var(--teal-900);
+      text-align: center;
+    }
+
+    .section p.section-intro {
+      max-width: 750px;
+      margin: 0 auto 2.5rem;
+      text-align: center;
+      color: var(--gray-600);
+    }
+
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;
+    }
+
+    .plan-card {
+      border-radius: 20px;
+      border: 1px solid var(--gray-100);
+      background: white;
+      box-shadow: 0 24px 48px -32px rgba(0, 64, 80, 0.35);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(160deg, rgba(71, 174, 95, 0.12), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .plan-card:hover::before {
+      opacity: 1;
+    }
+
+    .plan-card.enhanced {
+      border: 1px solid rgba(0, 204, 97, 0.35);
+      transform: translateY(-10px);
+    }
+
+    .plan-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .plan-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--teal-900);
+    }
+
+    .plan-tagline {
+      color: var(--green-400);
+      font-weight: 600;
+    }
+
+    .plan-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gray-800);
+    }
+
+    .implementation-note {
+      margin-top: auto;
+      font-size: 0.95rem;
+      color: var(--gray-600);
+      border-top: 1px dashed var(--gray-300);
+      padding-top: 1rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .feature-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0, 204, 97, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green-500);
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .feature-list strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+      color: var(--gray-800);
+    }
+
+    .feature-muted {
+      color: #9ca9a6;
+      font-style: italic;
+    }
+
+    .plan-card button,
+    .add-on-card button,
+    .cta-actions a {
+      background: var(--green-500);
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 0.9rem 1.75rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 16px 24px -18px rgba(0, 64, 80, 0.5);
+      text-decoration: none;
+      text-align: center;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .plan-card button:hover,
+    .add-on-card button:hover,
+    .cta-actions a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 28px -18px rgba(0, 64, 80, 0.6);
+    }
+
+    .comparison-table-wrapper {
+      margin-top: 3rem;
+      border-radius: 20px;
+      border: 1px solid var(--gray-100);
+      overflow: hidden;
+      box-shadow: 0 24px 40px -35px rgba(0, 64, 80, 0.4);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      font-size: 0.98rem;
+    }
+
+    thead {
+      background: var(--gray-50);
+    }
+
+    th,
+    td {
+      padding: 1rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    thead th {
+      font-size: 1.05rem;
+      color: var(--teal-900);
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(71, 174, 95, 0.04);
+    }
+
+    .check {
+      color: var(--green-500);
+      font-weight: 700;
+    }
+
+    .dash {
+      color: #99aaa5;
+      font-weight: 600;
+    }
+
+    .level-note {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
+
+    .add-ons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.75rem;
+      margin-top: 2.5rem;
+    }
+
+    .add-on-card {
+      border: 1px solid var(--gray-100);
+      border-radius: 18px;
+      padding: 2rem;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 24px 48px -32px rgba(0, 64, 80, 0.35);
+    }
+
+    .add-on-card h3 {
+      margin: 0;
+      color: var(--teal-900);
+      font-size: 1.25rem;
+    }
+
+    .add-on-pricing {
+      font-weight: 600;
+      color: var(--green-400);
+    }
+
+    details {
+      border: 1px solid var(--gray-100);
+      border-radius: 16px;
+      padding: 1rem 1.25rem;
+      background: white;
+      box-shadow: 0 16px 32px -28px rgba(0, 64, 80, 0.35);
+    }
+
+    details:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--teal-900);
+      outline: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      float: right;
+      font-size: 1.25rem;
+      color: var(--green-400);
+      transition: transform 0.3s ease;
+    }
+
+    details[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-content {
+      margin-top: 0.75rem;
+      color: var(--gray-600);
+    }
+
+    .cta-section {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(0, 64, 80, 0.9), rgba(0, 204, 97, 0.9));
+      color: white;
+      padding: 4rem 1.5rem;
+      border-radius: 24px;
+      margin-top: 4rem;
+    }
+
+    .cta-section h3 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      max-width: 640px;
+      margin: 0 auto 2rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-actions a.secondary {
+      background: white;
+      color: var(--teal-900);
+      box-shadow: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem 3rem;
+      color: var(--gray-600);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 1024px) {
+      .plan-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 3.5rem 1.25rem 2.5rem;
+      }
+
+      .plan-card {
+        padding: 2rem 1.5rem;
+      }
+
+      th,
+      td {
+        padding: 0.85rem 1rem;
+      }
+
+      .cta-section {
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Grievance.app Pricing</h1>
+    <p>
+      Explore three purpose-built annual plans designed to elevate grievance management across organizations of every size.
+      Each plan includes our core platform plus a one-time implementation program to ensure a smooth launch, configuration,
+      and onboarding for your teams.
+    </p>
+  </header>
+
+  <main>
+    <section class="section" id="plans">
+      <h2>Choose the Right Plan for Your Organization</h2>
+      <p class="section-intro">
+        Compare Standard, Enhanced, and Enterprise subscriptions to find the ideal balance of capability, support, and
+        customization. Each option includes full access to Grievance.app’s core case management foundation.
+      </p>
+
+      <div class="plan-grid">
+        <article class="plan-card">
+          <div class="plan-header">
+            <span class="plan-name">Standard</span>
+            <span class="plan-tagline">Essentials for streamlined case handling</span>
+            <span class="plan-price">$8,000<span class="level-note">/year</span></span>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <span class="feature-icon">✓</span>
+              <div>
+                <strong>Core Case Management</strong>
+                Basic intake, tracking, and reporting capabilities to resolve grievances efficiently.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">URL</span>
+              <div>
+                <strong>Custom Sub-Domain</strong>
+                Launch on <em>yourorganization.grievance.app</em> for foundational branding.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">S</span>
+              <div>
+                <strong>Technical Support</strong>
+                Email/ticket support during business hours for troubleshooting and guidance.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">✗</span>
+              <div>
+                <strong>Mobile Apps</strong>
+                <span class="feature-muted">Access via responsive web only. Mobile apps are unlocked in higher tiers.</span>
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">⚙️</span>
+              <div>
+                <strong>Customization</strong>
+                Out-of-the-box setup with logo and standard workflow; no deep customization.
+              </div>
+            </li>
+          </ul>
+          <button type="button">Get Started</button>
+          <p class="implementation-note">
+            One-time implementation fee of <strong>$25,000</strong> applies to cover setup, configuration, data migration, and training.
+          </p>
+        </article>
+
+        <article class="plan-card enhanced">
+          <div class="plan-header">
+            <span class="plan-name">Enhanced</span>
+            <span class="plan-tagline">Balanced capabilities for growing teams</span>
+            <span class="plan-price">$15,000<span class="level-note">/year</span></span>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <span class="feature-icon">✓</span>
+              <div>
+                <strong>All Standard Features</strong>
+                Includes every capability from the Standard plan.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">📄</span>
+              <div>
+                <strong>Template Library</strong>
+                Pre-built report and communication templates accelerate operational readiness.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">URL</span>
+              <div>
+                <strong>Brand-Aligned Portal</strong>
+                Custom sub-domain plus theming to match your organization’s visual identity.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">📊</span>
+              <div>
+                <strong>Analytics &amp; API Access</strong>
+                Enhanced reporting tools and open API readiness for integrations.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">☎️</span>
+              <div>
+                <strong>Priority Technical Assistance</strong>
+                Faster response guidance to optimize grievance workflows.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">📱</span>
+              <div>
+                <strong>Mobile Access</strong>
+                Responsive web and Android experience; iOS apps exclusive to Enterprise.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">⚙️</span>
+              <div>
+                <strong>Moderate Customization</strong>
+                Workflow and field configuration tailored to your requirements.
+              </div>
+            </li>
+          </ul>
+          <button type="button">Get Started</button>
+          <p class="implementation-note">
+            One-time implementation fee of <strong>$25,000</strong> applies to cover setup, configuration, data migration, and training.
+          </p>
+        </article>
+
+        <article class="plan-card">
+          <div class="plan-header">
+            <span class="plan-name">Enterprise</span>
+            <span class="plan-tagline">Maximum scale, security, and customization</span>
+            <span class="plan-price">$25,000<span class="level-note">/year</span></span>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <span class="feature-icon">✓</span>
+              <div>
+                <strong>All Enhanced Features</strong>
+                Unlock every capability from the Enhanced plan, plus Enterprise exclusives.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">📱</span>
+              <div>
+                <strong>Android &amp; iOS Apps</strong>
+                Dedicated mobile applications keep teams connected on any device.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">🛡️</span>
+              <div>
+                <strong>Advanced Security &amp; Performance</strong>
+                Enterprise-grade security controls with load-balanced infrastructure.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">🧭</span>
+              <div>
+                <strong>Full Customization</strong>
+                Extensive workflow tailoring, custom fields, and bespoke configurations.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">🤝</span>
+              <div>
+                <strong>Dedicated Account Manager</strong>
+                Proactive partnership with priority consulting support.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">⏱️</span>
+              <div>
+                <strong>Priority Support</strong>
+                24/7 or expedited response with top-tier SLAs.
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">⭐</span>
+              <div>
+                <strong>Advanced Features Suite</strong>
+                Confidential GBV workflows, offline access, and integrations (add-on dependent).
+              </div>
+            </li>
+          </ul>
+          <button type="button">Get Started</button>
+          <p class="implementation-note">
+            One-time implementation fee of <strong>$25,000</strong> applies to cover setup, configuration, data migration, and training.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="comparison">
+      <h2>Plan Feature Comparison</h2>
+      <p class="section-intro">
+        Review the feature matrix to understand exactly what is included out-of-the-box with each subscription level. Items
+        marked with a dash can be unlocked through the appropriate add-on or by upgrading tiers.
+      </p>
+
+      <div class="comparison-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Standard</th>
+              <th>Enhanced</th>
+              <th>Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Annual Subscription Fee</td>
+              <td>$8,000/year</td>
+              <td>$15,000/year</td>
+              <td>$25,000/year</td>
+            </tr>
+            <tr>
+              <td>One-Time Setup Fee (all plans)</td>
+              <td><span class="check">$25,000 ✓</span></td>
+              <td><span class="check">$25,000 ✓</span></td>
+              <td><span class="check">$25,000 ✓</span></td>
+            </tr>
+            <tr>
+              <td>Core Case Management (Intake, Tracking, Basic Reporting)</td>
+              <td><span class="check">✓ Basic</span></td>
+              <td><span class="check">✓ Enhanced</span></td>
+              <td><span class="check">✓ Enhanced</span></td>
+            </tr>
+            <tr>
+              <td>API Access for Integrations</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Standard Reports &amp; Analytics</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Advanced Analytics</td>
+              <td><span class="dash">–</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Pre-Built Template Documents</td>
+              <td><span class="dash">–</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Custom Sub-Domain (Branded URL)</td>
+              <td><span class="dash">–</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Dedicated Android Mobile App</td>
+              <td><span class="dash">–</span></td>
+              <td><span class="dash">–</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Dedicated iOS Mobile App</td>
+              <td><span class="dash">–</span></td>
+              <td><span class="dash">–</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Advanced Security (SSL, 2FA, etc.)</td>
+              <td><span class="check">✓ Basic</span></td>
+              <td><span class="check">✓ Standard</span></td>
+              <td><span class="check">✓ Enhanced</span></td>
+            </tr>
+            <tr>
+              <td>High-Performance Infrastructure (Load Balancing)</td>
+              <td><span class="dash">–</span></td>
+              <td><span class="dash">–</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Basic Configuration &amp; Branding</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Extensive Customization</td>
+              <td><span class="dash">–</span></td>
+              <td><span class="dash">–</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Standard Support (Email)</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="dash">– (Elevated)</span></td>
+            </tr>
+            <tr>
+              <td>Priority Support &amp; SLA</td>
+              <td><span class="dash">–</span></td>
+              <td><span class="dash">–</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Dedicated Account Manager</td>
+              <td><span class="dash">–</span></td>
+              <td><span class="dash">–</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="add-ons">
+      <h2>Optional Add-On Modules</h2>
+      <p class="section-intro">
+        Extend your Grievance.app deployment with specialized capabilities that address hotline engagement, offline data
+        capture, GBV workflows, and deep integrations. Each add-on can be combined with any subscription tier.
+      </p>
+
+      <div class="add-ons-grid">
+        <article class="add-on-card">
+          <h3>IVR Integration (Telephone Hotline)</h3>
+          <p class="add-on-pricing">One-time $15,000 setup &nbsp;•&nbsp; $3,000/year</p>
+          <p>
+            Launch a toll-free hotline so constituents can submit grievances via voice or touch-tone commands. Calls feed
+            directly into the platform for centralized tracking.
+          </p>
+          <button type="button">Add to Plan</button>
+        </article>
+
+        <article class="add-on-card">
+          <h3>SMS Submission &amp; Alerts</h3>
+          <p class="add-on-pricing">One-time $7,500 setup &nbsp;•&nbsp; $1,500/year</p>
+          <p>
+            Enable two-way SMS to file new grievances, request updates, and receive automated notifications. Message carrier
+            fees apply separately.
+          </p>
+          <button type="button">Add to Plan</button>
+        </article>
+
+        <article class="add-on-card">
+          <h3>GBV Workflow Module</h3>
+          <p class="add-on-pricing">One-time $10,000 setup &nbsp;•&nbsp; $2,000/year</p>
+          <p>
+            Introduce confidential workflows, restricted access controls, and tailored data fields for Gender-Based Violence
+            case handling in accordance with best practices.
+          </p>
+          <button type="button">Add to Plan</button>
+        </article>
+
+        <article class="add-on-card">
+          <h3>Offline Access Capability</h3>
+          <p class="add-on-pricing">One-time $20,000 setup &nbsp;•&nbsp; $5,000/year</p>
+          <p>
+            Provide field teams with an offline-enabled experience to log grievances without connectivity and sync once back
+            online.
+          </p>
+          <button type="button">Add to Plan</button>
+        </article>
+
+        <article class="add-on-card">
+          <h3>Third-Party System Integration</h3>
+          <p class="add-on-pricing">$10,000 setup per integration &nbsp;•&nbsp; $2,000/year</p>
+          <p>
+            Connect Grievance.app with external platforms such as MIS or call center tools for seamless data exchange and
+            process continuity.
+          </p>
+          <button type="button">Add to Plan</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <p class="section-intro">
+        Address common considerations so you can move forward with confidence. Each answer reflects Grievance.app’s
+        deployment best practices and service commitments.
+      </p>
+
+      <details>
+        <summary>Can I upgrade or downgrade plans later?</summary>
+        <div class="faq-content">
+          Yes. You can adjust your subscription tier at any time. Pricing is prorated so you only pay the difference between
+          plans for the remaining term.
+        </div>
+      </details>
+
+      <details>
+        <summary>Is there a free trial or demo available?</summary>
+        <div class="faq-content">
+          We provide guided demonstrations and a sandbox trial environment upon request. Our team will configure the demo to
+          mirror your processes so stakeholders can evaluate the platform thoroughly.
+        </div>
+      </details>
+
+      <details>
+        <summary>How is data secured within Grievance.app?</summary>
+        <div class="faq-content">
+          Data is protected with enterprise-grade encryption, routine backups, and compliance with relevant data protection
+          standards. Enterprise clients can extend protections with advanced security controls.
+        </div>
+      </details>
+
+      <details>
+        <summary>What does the one-time implementation fee cover?</summary>
+        <div class="faq-content">
+          The $25,000 onboarding program covers deployment of your dedicated cloud instance, configuration, branding, data
+          migration, and comprehensive training for administrators and end-users.
+        </div>
+      </details>
+
+      <details>
+        <summary>Can I add integrations or specialized modules later?</summary>
+        <div class="faq-content">
+          Absolutely. Optional modules such as IVR, SMS, offline access, and bespoke integrations can be activated whenever
+          your organization is ready to expand functionality.
+        </div>
+      </details>
+    </section>
+
+    <section class="section">
+      <div class="cta-section">
+        <h3>Ready to transform your grievance management process?</h3>
+        <p>
+          Our team will help configure Grievance.app to align with your workflows, train your users, and ensure a confident
+          go-live. Select a plan or connect with us for a tailored proposal.
+        </p>
+        <div class="cta-actions">
+          <a href="#" class="primary">Get Started Now</a>
+          <a href="#" class="secondary">Contact Sales</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Consistency assured: All pricing and feature information aligns with Grievance.app’s official technical and financial
+    proposals.
+  </footer>
+</body>
+</html>
